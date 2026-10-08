@@ -31,4 +31,5 @@ Run lint and typecheck before declaring any task done.
 - Docs: https://docs.expo.dev/router/introduction.md
 
 ## Rules
+
 - Prefer recommended Expo modules over third-party libraries, and check your available skills before adding dependencies. Docs: https://docs.expo.dev/versions/latest/index.md
