@@ -4,7 +4,7 @@
  */
 import { isWaitingOnCue } from './intention';
 import type { EnergyCost, EnergyLevel, ISODateTime, Task } from './model';
-import type { AppState } from './reducer';
+import type { AppState } from './state';
 
 /** Lower is a better fit. Missing entries mean "don't put this on the Now card at this energy". */
 const FIT: Record<EnergyLevel, Partial<Record<EnergyCost, number>>> = {
