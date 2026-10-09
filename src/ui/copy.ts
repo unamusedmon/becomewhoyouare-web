@@ -65,6 +65,7 @@ export const copy = {
   voiceKeyboard: "This browser can't listen. Type it instead.",
   voiceCaught: (n: number) => (n === 1 ? 'Caught it. First step ready.' : `Caught ${n} things. Each has a first step.`),
   voiceMissed: "Didn't catch that. Try again, or type it.",
+  voiceFailed: (code: string) => `Voice didn't work this time (${code}). Try again, or use your keyboard's mic.`,
   alsoHere: 'Also here',
   rowHint: 'Shows: do this now, rename, let it go',
   doNow: 'do this now',
