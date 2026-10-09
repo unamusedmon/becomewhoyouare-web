@@ -1,4 +1,4 @@
-import { Link, router } from 'expo-router';
+import { Link, router, usePathname } from 'expo-router';
 import type { ReactNode } from 'react';
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -13,6 +13,7 @@ export function Screen({ children, nav }: { children: ReactNode; nav?: { href: '
   // Android draws edge to edge (SDK 54+), so the status bar, gesture bar and keyboard are ours to avoid.
   const insets = useSafeAreaInsets();
   const { undo } = useApp();
+  const path = usePathname();
   // The Undo bar takes the bottom edge for a few seconds; the add button steps up out of its way.
   const lift = isFresh(undo, Date.now()) ? 64 : 0;
   return (
@@ -25,7 +26,10 @@ export function Screen({ children, nav }: { children: ReactNode; nav?: { href: '
           {nav ? (
             <View style={st.top}>
               <Text style={st.brand}>Become Who You Are</Text>
-              <Link href={nav.href} style={st.nav}>{nav.label}</Link>
+              <View style={st.links}>
+                <Link href={nav.href} style={st.nav}>{nav.label}</Link>
+                {path === '/settings' ? null : <Link href="/settings" style={st.nav}>{copy.settings.link}</Link>}
+              </View>
             </View>
           ) : null}
           {children}
@@ -59,6 +63,7 @@ const st = themed(() => ({
   scroll: { padding: space.md, gap: space.lg, maxWidth: 640, width: '100%', alignSelf: 'center' },
   top: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline' },
   brand: { color: colors.faint, fontFamily: fonts.serif, fontSize: 15, letterSpacing: 1, fontStyle: 'italic' },
+  links: { flexDirection: 'row', gap: space.md },
   nav: { color: colors.muted, fontFamily: fonts.sans, fontSize: 15 },
   fab: {
     // Quiet on purpose: gold fill belongs to the Now card's one big button.
