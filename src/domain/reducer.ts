@@ -44,7 +44,10 @@ export function reducer(state: AppState, action: Action): AppState {
   return used ? { ...stamped, hints: markSeen(stamped.hints, used, action.at) } : stamped;
 }
 
-function step(state: AppState, action: Action): AppState {
+/** sync_merge is handled before dispatching to a domain slice. */
+type SliceAction = Exclude<Action, { type: 'sync_merge' }>;
+
+function step(state: AppState, action: SliceAction): AppState {
   if (isTaskAction(action)) return tasksStep(state, action);
   if (isRoutineAction(action)) return routinesStep(state, action);
   if (isIntentionAction(action)) return intentionsStep(state, action);
