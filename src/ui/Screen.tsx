@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { isFresh } from '../domain/undo';
 import { useApp } from '../state/AppStateContext';
 import { copy } from './copy';
+import { GearIcon } from './GearIcon';
 import { colors, fonts, space, themed } from './theme';
 
 /** Shared page frame: dark, one column, readable width on web. */
@@ -28,7 +29,17 @@ export function Screen({ children, nav }: { children: ReactNode; nav?: { href: '
               <Text style={st.brand}>Become Who You Are</Text>
               <View style={st.links}>
                 <Link href={nav.href} style={st.nav}>{nav.label}</Link>
-                {path === '/settings' ? null : <Link href="/settings" style={st.nav}>{copy.settings.link}</Link>}
+                {path === '/settings' ? null : (
+                  <Link href="/settings" asChild>
+                    <Pressable
+                      accessibilityRole="link"
+                      accessibilityLabel={copy.settings.link}
+                      style={st.gear}
+                    >
+                      <GearIcon />
+                    </Pressable>
+                  </Link>
+                )}
               </View>
             </View>
           ) : null}
@@ -61,10 +72,12 @@ export const screenStyles = themed(() => ({
 const st = themed(() => ({
   root: { flex: 1, backgroundColor: colors.bg },
   scroll: { padding: space.md, gap: space.lg, maxWidth: 640, width: '100%', alignSelf: 'center' },
-  top: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline' },
+  top: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   brand: { color: colors.faint, fontFamily: fonts.serif, fontSize: 15, letterSpacing: 1, fontStyle: 'italic' },
-  links: { flexDirection: 'row', gap: space.md },
+  links: { flexDirection: 'row', gap: space.md, alignItems: 'center' },
   nav: { color: colors.muted, fontFamily: fonts.sans, fontSize: 15 },
+  // 44px tap target around a 20px gear; negative margin keeps the header row its old height.
+  gear: { width: 44, height: 44, margin: -12, alignItems: 'center', justifyContent: 'center' },
   fab: {
     // Quiet on purpose: gold fill belongs to the Now card's one big button.
     position: 'absolute', right: space.md, width: 56, height: 56, borderRadius: 28,
