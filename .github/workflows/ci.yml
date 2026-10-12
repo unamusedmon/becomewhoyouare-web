@@ -16,3 +16,24 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
+  shared-domain:
+    # The Android repo carries the original of src/domain. Compare against its branch of
+    # the same name when there is one (a change made in both repos), otherwise its main.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pick the Android repo's matching branch
+        id: sibling
+        run: |
+          branch="${{ github.head_ref || github.ref_name }}"
+          if git ls-remote --exit-code --heads https://github.com/unamusedmon/becomewhoyouare.git "$branch" >/dev/null; then
+            echo "ref=$branch" >> "$GITHUB_OUTPUT"
+          else
+            echo "ref=main" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/checkout@v4
+        with:
+          repository: unamusedmon/becomewhoyouare
+          ref: ${{ steps.sibling.outputs.ref }}
+          path: sibling
+      - run: node scripts/check-shared-domain.mjs src/domain sibling/app/src/domain

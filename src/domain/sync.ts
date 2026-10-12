@@ -39,6 +39,16 @@ export function parseRemote(text: string): RemoteFile | undefined {
   }
 }
 
+/** True when the text is a sync file from a later version of the app than this one. */
+export function isFromNewerApp(text: string): boolean {
+  try {
+    const parsed = JSON.parse(text) as { format?: unknown; version?: unknown } | null;
+    return parsed?.format === 'become-who-you-are/sync' && typeof parsed.version === 'number' && parsed.version > 1;
+  } catch {
+    return false;
+  }
+}
+
 const ms = (at: ISODateTime | undefined) => (at ? Date.parse(at) || 0 : 0);
 
 function byNewest<T extends { id: string }>(mine: T[], theirs: T[], stamp: (x: T) => ISODateTime | undefined): T[] {

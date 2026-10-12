@@ -68,3 +68,21 @@ export function migrate(saved: Partial<AppState> & { version: 1 }): AppState {
     experiments: { ...initialState.experiments, ...saved.experiments },
   };
 }
+
+/**
+ * Reads what was saved on this device. A save this app can't read (corrupted, or
+ * written by a newer version) comes back as `unreadable` so the caller can keep a
+ * copy before starting fresh, instead of quietly writing over it.
+ */
+export function readSaved(json: string | null): { state: AppState | null; unreadable: boolean } {
+  if (!json) return { state: null, unreadable: false };
+  try {
+    const parsed = JSON.parse(json) as Partial<AppState> | null;
+    if (parsed && typeof parsed === 'object' && parsed.version === 1) {
+      return { state: migrate(parsed as Partial<AppState> & { version: 1 }), unreadable: false };
+    }
+  } catch {
+    // Fall through: unreadable.
+  }
+  return { state: null, unreadable: true };
+}

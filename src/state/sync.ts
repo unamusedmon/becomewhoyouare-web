@@ -16,7 +16,7 @@ import { deriveKey, newKdf, sealedKdf, seal, unseal, WrongKeyError, type SyncKey
 import { editsSince, renderOrg } from '../domain/org';
 import { decryptWithKey, encryptToKey, epaHeader, GpgError, type GpgKey } from '../domain/pgp';
 import { reducer, type Action, type AppState } from '../domain/reducer';
-import { mergeStates, parseRemote, toRemote } from '../domain/sync';
+import { isFromNewerApp, mergeStates, parseRemote, toRemote } from '../domain/sync';
 import { davDelete, davGet, davPut, type DavConfig } from './webdav';
 import { newId, type Dispatch } from './useAppState';
 
@@ -123,6 +123,9 @@ function readRemote(text: string, key: SyncKey | undefined) {
     }
   }
   const remote = parseRemote(plain);
+  if (!remote && isFromNewerApp(plain)) {
+    throw new SyncError('Another device has a newer version of the app. Update this one, then sync again.');
+  }
   if (!remote) throw new SyncError(`${DATA_FILE} on the server isn't a file this app wrote.`);
   return remote;
 }

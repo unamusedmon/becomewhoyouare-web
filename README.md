@@ -93,7 +93,7 @@ With encryption on, a plaintext Org file would give the game away, so Org is wri
 
 The phone app and this one each carry their own copy of the shared rules in `src/domain/`: the model, the reducer, sync merging (`sync.ts`), Org (`org.ts`), encryption (`crypto.ts`) and GPG (`pgp.ts`). There is no shared package, on purpose, for now: two small apps are easier to love than one monorepo.
 
-The price is a promise. **The sync file format must stay compatible in both repos.** If you change `sync.ts`, `org.ts`, `crypto.ts`, `pgp.ts` or the shape of the state in `model.ts`/`reducer.ts` here, make the same change in the phone repo (and the other way round), or one of them will start reading the other's file as gibberish. Eternal recurrence is a thought experiment, not a merge strategy.
+The price is a promise. **The sync file format must stay compatible in both repos.** If you change `sync.ts`, `org.ts`, `crypto.ts`, `pgp.ts` or the shape of the state in `model.ts`/`reducer.ts` here, make the same change in the phone repo (and the other way round), or one of them will start reading the other's file as gibberish. Eternal recurrence is a thought experiment, not a merge strategy. CI checks the promise: the `shared-domain` job compares `src/domain/` with the phone repo's copy (its branch of the same name if there is one, otherwise `main`) and fails on any difference, so a change that spans both goes out as two same-named branches.
 
 ---
 

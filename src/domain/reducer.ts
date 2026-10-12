@@ -15,7 +15,7 @@ import { isIntentionAction, intentionsStep, type IntentionAction } from './inten
 import { isBecomingAction, becomingsStep, type BecomingAction } from './becomings';
 import { isSettingsAction, settingsStep, type SettingsAction } from './settings';
 
-export { initialState, migrate, MAX_BECOMINGS } from './state';
+export { initialState, migrate, readSaved, MAX_BECOMINGS } from './state';
 export { createTask, SLIP_PROMPT_AFTER } from './tasks';
 export type { Action } from './actions';
 export type { AppState } from './state';

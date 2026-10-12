@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useCallback, useEffect, useReducer, useRef } from 'react';
 
-import { initialState, migrate, reducer, type Action, type AppState } from '../domain/reducer';
+import { initialState, readSaved, reducer, type Action, type AppState } from '../domain/reducer';
 import { track, type UndoSlot } from '../domain/undo';
 
 const STORAGE_KEY = 'bwya/state/v1';
@@ -31,9 +31,13 @@ export function useAppState(): { state: AppState; hydrated: boolean; dispatch: D
   useEffect(() => {
     let cancelled = false;
     AsyncStorage.getItem(STORAGE_KEY)
-      .then((json) => {
-        const parsed = json ? (JSON.parse(json) as AppState) : null;
-        if (!cancelled) rawDispatch({ type: 'hydrate', state: parsed?.version === 1 ? migrate(parsed) : null });
+      .then(async (json) => {
+        const saved = readSaved(json);
+        // Keep a copy of anything we can't read before the first save writes over it.
+        if (saved.unreadable && json) {
+          await AsyncStorage.setItem(`${STORAGE_KEY}/unreadable/${new Date().toISOString()}`, json).catch(() => undefined);
+        }
+        if (!cancelled) rawDispatch({ type: 'hydrate', state: saved.state });
       })
       .catch(() => !cancelled && rawDispatch({ type: 'hydrate', state: null }));
     return () => {
