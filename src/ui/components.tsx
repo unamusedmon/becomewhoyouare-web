@@ -30,6 +30,8 @@ export function Toggle({ label, value, onChange, disabled }: { label: string; va
 }
 
 export function Button({ label, onPress, kind = 'quiet', wide }: { label: string; onPress: () => void; kind?: 'primary' | 'quiet'; wide?: boolean }) {
+  // The gold button reads like the start of a sentence; quiet ones keep their lowercase.
+  const text = kind === 'primary' ? label.charAt(0).toUpperCase() + label.slice(1) : label;
   return (
     <Pressable
       accessibilityRole="button"
@@ -37,7 +39,7 @@ export function Button({ label, onPress, kind = 'quiet', wide }: { label: string
       android_ripple={{ color: kind === 'primary' ? colors.accentPressed : colors.line }}
       style={({ pressed }) => [kind === 'primary' ? s.primary : s.quiet, wide && s.wide, pressed && Platform.OS !== 'android' && { opacity: 0.7 }]}
     >
-      <Text style={kind === 'primary' ? s.primaryText : s.quietText}>{label}</Text>
+      <Text style={kind === 'primary' ? s.primaryText : s.quietText}>{text}</Text>
     </Pressable>
   );
 }

@@ -9,7 +9,7 @@ export const copy = {
 
   firstStepLabel: 'First step',
   /** The first-step test's "without" arm shows only the task. */
-  holdoutLabel: 'Just the task, this time',
+  holdoutLabel: 'Only the task, this time',
   firstStepHint: 'Do only this. Then tap the button.',
   energyNow: (level: string) => `Force right now: ${level}.`,
   change: 'change',
@@ -61,7 +61,7 @@ export const copy = {
   voiceStart: 'Talk instead of typing',
   voiceStop: 'Done talking',
   voiceListening: 'Listening. Say it all, in any order.',
-  voiceTapToStop: 'Tap the mic again when you are done.',
+  voiceTapToStop: "Tap the mic again when you're done.",
   voiceKeyboard: "This browser can't listen. Type it instead.",
   voiceCaught: (n: number) => (n === 1 ? 'Caught it. First step ready.' : `Caught ${n} things. Each has a first step.`),
   voiceMissed: "Didn't catch that. Try again, or type it.",
@@ -70,6 +70,7 @@ export const copy = {
   rowHint: 'Shows: do this now, rename, let it go',
   doNow: 'do this now',
   rename: 'rename',
+  renameTitle: 'Rename',
   renameHint: 'tap to rename',
   heldBack: (n: number) => `${n} heavier ${n === 1 ? 'thing is' : 'things are'} resting until you have more force.`,
 
@@ -132,7 +133,7 @@ export const copy = {
     rarerNote: 'Looser now. See how it feels.',
     tollNote: "Marked as a toll. You won't be asked if it should exist.",
     linkTitle: 'Who does this make you?',
-    mostlyNo: "That's a lot of no. That's important information, not a crisis. Look at the bigger picture in Becoming sometime.",
+    mostlyNo: "That's a lot of no, and that's information, not a crisis. The bigger picture lives in Becoming.",
     frequencyTitle: "You've skipped this a few times.",
     frequencyBody: 'Ask less often, or not at all?',
     less: 'Less often',
@@ -192,7 +193,7 @@ export const copy = {
     modes: { event: 'a moment', after: 'after a task', time: 'a time' } as Record<'event' | 'after' | 'time', string>,
     addPlace: 'add a place or a stall plan',
     when: 'When…',
-    whenPlaceholder: 'I finish my coffee',
+    whenPlaceholder: 'the kettle boils',
     after: 'Right after…',
     where: 'Where (optional)',
     wherePlaceholder: 'at my desk',
