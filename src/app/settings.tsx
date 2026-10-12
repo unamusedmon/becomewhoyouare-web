@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { firstStepTestProgress, firstStepTestResult } from '../domain/experiment';
+import { missingPractices, PRACTICES } from '../domain/practice';
 import { useApp } from '../state/AppStateContext';
-import { s as shared, Toggle } from '../ui/components';
+import { Button, s as shared, Toggle } from '../ui/components';
 import { copy } from '../ui/copy';
 import { Screen, screenStyles } from '../ui/Screen';
 import { EncryptionSettings, OrgSettings, SyncSettings } from '../ui/SyncSettings';
@@ -19,6 +20,8 @@ export default function SettingsScreen() {
 
   const test = firstStepTestResult(state.events, state.tasks);
   const testProgress = firstStepTestProgress(state.events);
+  const missing = missingPractices(state);
+  const addPractice = () => missing.forEach((p) => dispatch({ type: 'add_routine', id: p.id, title: p.title, cadence: p.cadence }));
 
   return (
     <Screen nav={{ href: '/becoming', label: copy.becomingLink }}>
@@ -43,6 +46,16 @@ export default function SettingsScreen() {
           </Text>
         ) : hintsReset ? <Text style={st.resetHints}>{b.hintsResetDone}</Text> : null}
         <Toggle label={b.recurrenceSetting} value={state.recurrence.enabled} onChange={(enabled) => dispatch({ type: 'set_recurrence_enabled', enabled })} />
+      </View>
+
+      <View style={[st.section, st.setting]}>
+        <Text style={shared.label}>{o.practice}</Text>
+        <Text style={shared.faint}>{o.practiceNote}</Text>
+        {missing.length === 0 ? (
+          <Text style={st.settingText}>{o.practiceAdded}</Text>
+        ) : (
+          <Button label={missing.length === PRACTICES.length ? o.practiceAdd : o.practiceAddMissing(missing.length)} onPress={addPractice} />
+        )}
       </View>
 
       <View style={[st.section, st.setting]}>
