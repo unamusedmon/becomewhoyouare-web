@@ -1,0 +1,223 @@
+{
+  "format": "become-who-you-are/sync",
+  "version": 1,
+  "writtenAt": "2026-10-12T09:10:00.000Z",
+  "state": {
+    "version": 1,
+    "tasks": [
+      {
+        "id": "r1@2026-10-12",
+        "createdAt": "2026-10-12T09:02:00.000Z",
+        "updatedAt": "2026-10-12T09:02:00.000Z",
+        "title": "Evening: would I live it again?",
+        "state": "open",
+        "firstStep": {
+          "text": "Put what you need for \"Evening: would I live it…\" in front of you",
+          "verb": "put",
+          "estSeconds": 60,
+          "source": "template",
+          "shrinkDepth": 0,
+          "alternatives": [
+            "Stand up and walk to where this happens",
+            "Set a timer for one song and touch the first piece"
+          ]
+        },
+        "energy": "medium",
+        "energySource": "inferred",
+        "duration": {
+          "rawMinutes": 20,
+          "plannedMinutes": 30,
+          "experiential": {
+            "unitId": "podcast",
+            "count": 1,
+            "label": "about one podcast episode"
+          },
+          "confidence": "guess"
+        },
+        "stats": {
+          "timesSurfaced": 0,
+          "timesSlipped": 0,
+          "timesShrunk": 0
+        },
+        "decayAfterDays": 21,
+        "routineId": "r1",
+        "becomingIds": []
+      },
+      {
+        "id": "t1",
+        "createdAt": "2026-10-12T09:03:00.000Z",
+        "updatedAt": "2026-10-12T09:08:00.000Z",
+        "title": "Email the landlord",
+        "state": "done",
+        "firstStep": {
+          "text": "Open your email and type the subject line",
+          "verb": "open",
+          "estSeconds": 60,
+          "source": "template",
+          "shrinkDepth": 0,
+          "alternatives": [
+            "Put your phone down and open your email on the laptop",
+            "Type \"Hi the landlord\" and nothing else"
+          ],
+          "doneAt": "2026-10-12T09:07:00.000Z"
+        },
+        "energy": "medium",
+        "energySource": "inferred",
+        "duration": {
+          "rawMinutes": 15,
+          "plannedMinutes": 25,
+          "experiential": {
+            "unitId": "episode_sitcom",
+            "count": 1,
+            "label": "about one sitcom episode"
+          },
+          "confidence": "guess"
+        },
+        "stats": {
+          "timesSurfaced": 1,
+          "timesSlipped": 0,
+          "timesShrunk": 0,
+          "firstStartedAt": "2026-10-12T09:07:00.000Z",
+          "lastStartLatencySec": 60
+        },
+        "decayAfterDays": 21,
+        "lastSurfacedAt": "2026-10-12T09:06:00.000Z"
+      },
+      {
+        "id": "t2",
+        "createdAt": "2026-10-12T09:04:00.000Z",
+        "updatedAt": "2026-10-12T09:05:00.000Z",
+        "title": "Write the essay",
+        "state": "open",
+        "firstStep": {
+          "text": "Open the essay and read the last paragraph",
+          "verb": "open",
+          "estSeconds": 60,
+          "source": "template",
+          "shrinkDepth": 0,
+          "alternatives": [
+            "Sit at the desk and open the doc",
+            "Type one ugly sentence. Make it bad on purpose"
+          ]
+        },
+        "energy": "deep",
+        "energySource": "inferred",
+        "duration": {
+          "rawMinutes": 45,
+          "plannedMinutes": 70,
+          "experiential": {
+            "unitId": "episode_sitcom",
+            "count": 3,
+            "label": "about three sitcom episodes"
+          },
+          "confidence": "guess"
+        },
+        "stats": {
+          "timesSurfaced": 0,
+          "timesSlipped": 0,
+          "timesShrunk": 0
+        },
+        "decayAfterDays": 21,
+        "becomingIds": [
+          "b1"
+        ]
+      }
+    ],
+    "events": [
+      {
+        "id": "mv50wpxc-1-81ul",
+        "taskId": "r1@2026-10-12",
+        "type": "created",
+        "at": "2026-10-12T09:02:00.000Z"
+      },
+      {
+        "id": "mv50y080-2-81ul",
+        "taskId": "t1",
+        "type": "created",
+        "at": "2026-10-12T09:03:00.000Z"
+      },
+      {
+        "id": "mv50zaio-3-81ul",
+        "taskId": "t2",
+        "type": "created",
+        "at": "2026-10-12T09:04:00.000Z",
+        "meta": {
+          "via": "voice"
+        }
+      },
+      {
+        "id": "mv511v40-4-81ul",
+        "taskId": "t1",
+        "type": "opened",
+        "at": "2026-10-12T09:06:00.000Z"
+      },
+      {
+        "id": "mv5135eo-5-81ul",
+        "taskId": "t1",
+        "type": "first_step_done",
+        "at": "2026-10-12T09:07:00.000Z",
+        "meta": {
+          "latencySec": 60
+        }
+      },
+      {
+        "id": "mv514fpc-6-81ul",
+        "taskId": "t1",
+        "type": "completed",
+        "at": "2026-10-12T09:08:00.000Z"
+      }
+    ],
+    "profile": {
+      "knownTools": {},
+      "estimateCalibration": {
+        "deep": 1.5,
+        "medium": 1.21,
+        "autopilot": 1.5
+      }
+    },
+    "becomings": [
+      {
+        "id": "b1",
+        "createdAt": "2026-10-12T09:01:00.000Z",
+        "updatedAt": "2026-10-12T09:01:00.000Z",
+        "statement": "Someone who walks without headphones",
+        "status": "active"
+      }
+    ],
+    "routines": [
+      {
+        "id": "r1",
+        "createdAt": "2026-10-12T09:02:00.000Z",
+        "updatedAt": "2026-10-12T09:02:00.000Z",
+        "title": "Evening: would I live it again?",
+        "cadence": "daily",
+        "nature": "unknown",
+        "becomingIds": [],
+        "status": "active",
+        "recurrence": {
+          "nextEligibleAt": "2026-10-26T09:02:00.000Z",
+          "consecutiveYes": 0,
+          "standing": "unasked"
+        }
+      }
+    ],
+    "verdicts": [],
+    "recurrence": {
+      "enabled": false,
+      "maxQuestionsPerSession": 3,
+      "dismissStreak": 0,
+      "askedAboutFrequency": false
+    },
+    "onboarding": {
+      "completedAt": "2026-10-12T09:00:00.000Z"
+    },
+    "overcoming": {
+      "lastShownAt": {}
+    },
+    "experiments": {
+      "firstStepTest": false
+    },
+    "changedAt": "2026-10-12T09:09:00.000Z",
+    "energy": "medium"
+  }
+}

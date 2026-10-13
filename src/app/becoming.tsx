@@ -63,7 +63,7 @@ export default function BecomingScreen() {
         {active.map((x) => (
           <View key={x.id} style={st.row}>
             <Text style={st.statement}>{x.statement}</Text>
-            <Text style={st.small} onPress={() => dispatch({ type: 'outgrow_becoming', id: x.id })}>{b.outgrow}</Text>
+            <Text style={st.small} accessibilityRole="button" onPress={() => dispatch({ type: 'outgrow_becoming', id: x.id })}>{b.outgrow}</Text>
           </View>
         ))}
         {active.length < MAX_BECOMINGS ? (
@@ -77,11 +77,11 @@ export default function BecomingScreen() {
               style={st.input}
               accessibilityLabel="Add who you are becoming"
             />
-            <Text style={st.addBtn} onPress={addBecoming}>{b.add}</Text>
+            <Text style={st.addBtn} accessibilityRole="button" onPress={addBecoming}>{b.add}</Text>
           </View>
         ) : null}
         <View>
-          <Text style={screenStyles.aphorism}>"{b.aphorism.text}"</Text>
+          <Text style={screenStyles.aphorism}>“{b.aphorism.text}”</Text>
           <Text style={shared.faint}>{b.aphorism.source}</Text>
         </View>
       </View>
@@ -121,7 +121,7 @@ export default function BecomingScreen() {
             style={st.input}
             accessibilityLabel="Add a routine"
           />
-          <Text style={st.addBtn} onPress={addRoutine}>{b.add}</Text>
+          <Text style={st.addBtn} accessibilityRole="button" onPress={addRoutine}>{b.add}</Text>
         </View>
         <View style={shared.row}>
           {CADENCE_ORDER.map((c) => (
@@ -171,13 +171,13 @@ const st = themed(() => ({
   section: { gap: space.md },
   row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: space.md },
   statement: { flex: 1, color: colors.ink, fontFamily: fonts.serif, fontSize: 20, fontStyle: 'italic' },
-  small: { color: colors.faint, fontFamily: fonts.sans, fontSize: 12 },
+  small: { color: colors.faint, fontFamily: fonts.sans, fontSize: 12, paddingVertical: space.sm, paddingLeft: space.sm },
   addRow: { flexDirection: 'row', alignItems: 'center', gap: space.md },
   input: {
     flex: 1, color: colors.ink, fontFamily: fonts.sans, fontSize: 16, backgroundColor: colors.surface,
     borderRadius: 10, borderWidth: 1, borderColor: colors.line, paddingHorizontal: 14, paddingVertical: 11,
   },
-  addBtn: { color: colors.accent, fontFamily: fonts.sans, fontSize: 15 },
+  addBtn: { color: colors.accent, fontFamily: fonts.sans, fontSize: 15, paddingVertical: space.sm },
   routine: { gap: 2, paddingVertical: space.sm, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: colors.line },
   routineTitle: { color: colors.ink, fontFamily: fonts.sans, fontSize: 16 },
   evidence: { color: colors.ink, fontFamily: fonts.serif, fontSize: 17, lineHeight: 25 },

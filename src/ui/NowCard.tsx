@@ -67,7 +67,7 @@ export function NowCard({ task, reason, becomings, showHint, tasks, dispatch, on
   if (renaming) {
     return (
       <View style={st.card}>
-        <Text style={shared.label}>{copy.rename}</Text>
+        <Text style={shared.label}>{copy.renameTitle}</Text>
         <RenameField title={task.title} onCancel={() => setRenaming(false)} onSave={(t) => { dispatch({ type: 'rename', taskId: id, title: t }); setRenaming(false); }} />
       </View>
     );
@@ -122,8 +122,9 @@ export function NowCard({ task, reason, becomings, showHint, tasks, dispatch, on
         <View style={st.card}>
           <Text style={[st.step, { color: colors.win }]}>{copy.started}</Text>
           <Text style={shared.faint}>{task.title}</Text>
-          <View style={shared.row}>
-            <Button kind="primary" label={copy.keepGoing} onPress={() => setJustStarted(false)} />
+          {/* Same shape as the step it replaces: one wide gold button, the quiet way out centered below. */}
+          <Button kind="primary" wide label={copy.keepGoing} onPress={() => setJustStarted(false)} />
+          <View style={[shared.row, { justifyContent: 'center' }]}>
             <Button label={copy.thatCounts} onPress={() => { setJustStarted(false); dispatch({ type: 'pause', taskId: id }); }} />
           </View>
         </View>
@@ -173,12 +174,12 @@ export function NowCard({ task, reason, becomings, showHint, tasks, dispatch, on
         <Button label={copy.tooBig} onPress={() => dispatch({ type: 'shrink', taskId: id })} />
         <Button label={copy.notNow} onPress={() => dispatch({ type: 'not_now', taskId: id })} />
       </View>
-      <View style={[shared.row, { justifyContent: 'center', gap: space.md }]}>
+      <View style={[shared.row, { justifyContent: 'center', gap: space.md, marginTop: -space.sm }]}>
         {task.firstStep.alternatives?.length ? (
-          <Text style={st.link} onPress={() => dispatch({ type: 'next_alternative', taskId: id })}>{copy.anotherStep}</Text>
+          <Text style={st.link} accessibilityRole="button" onPress={() => dispatch({ type: 'next_alternative', taskId: id })}>{copy.anotherStep}</Text>
         ) : null}
-        <Text style={st.link} onPress={() => { setDraft(task.firstStep.text); setEditing(true); }}>{copy.editStep}</Text>
-        <Text style={st.link} onPress={() => setPlanning(true)}>{task.intention ? copy.plan.change : copy.plan.link}</Text>
+        <Text style={st.link} accessibilityRole="button" onPress={() => { setDraft(task.firstStep.text); setEditing(true); }}>{copy.editStep}</Text>
+        <Text style={st.link} accessibilityRole="button" onPress={() => setPlanning(true)}>{task.intention ? copy.plan.change : copy.plan.link}</Text>
       </View>
     </View>
   );
@@ -188,7 +189,8 @@ const st = themed(() => ({
   card: { backgroundColor: colors.surface, borderRadius: 16, borderWidth: 1, borderColor: colors.line, padding: space.lg, gap: space.md },
   step: { color: colors.ink, fontFamily: fonts.serif, fontSize: 30, lineHeight: 38 },
   task: { color: colors.ink, fontFamily: fonts.sans, fontSize: 17, lineHeight: 23, opacity: 0.9 },
-  stepLabel: { color: colors.accent, fontFamily: fonts.sans, fontSize: 12, letterSpacing: 1.2, textTransform: 'uppercase' },
+  // Sentence case, like everything else: the tone guide keeps capitals for the recurrence card alone.
+  stepLabel: { color: colors.accent, fontFamily: fonts.sans, fontSize: 13, letterSpacing: 0.3 },
   metaRow: { flexDirection: 'row', alignItems: 'center', gap: space.sm },
   hint: { color: colors.muted, fontFamily: fonts.sans, fontSize: 14, lineHeight: 20 },
   divider: { height: StyleSheet.hairlineWidth, backgroundColor: colors.line },
@@ -196,5 +198,5 @@ const st = themed(() => ({
   title: { color: colors.ink, fontFamily: fonts.serif, fontSize: 24, lineHeight: 30 },
   body: { color: colors.ink, fontFamily: fonts.sans, fontSize: 16, lineHeight: 23, opacity: 0.85 },
   stall: { color: colors.muted, fontFamily: fonts.serif, fontSize: 15, lineHeight: 21, fontStyle: 'italic' },
-  link: { color: colors.muted, fontFamily: fonts.sans, fontSize: 13, textDecorationLine: 'underline' },
+  link: { color: colors.muted, fontFamily: fonts.sans, fontSize: 13, textDecorationLine: 'underline', paddingVertical: space.sm },
 }));

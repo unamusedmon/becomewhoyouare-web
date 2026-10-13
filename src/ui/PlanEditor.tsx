@@ -169,10 +169,10 @@ export function PlanEditor({ task, tasks, dispatch, onDone, showHint }: { task: 
       ) : null}
 
       {trigger && !(extras || where) ? (
-        <Text style={st.link} onPress={() => setExtras(true)}>{p.addPlace}</Text>
+        <Text style={st.link} accessibilityRole="button" onPress={() => setExtras(true)}>{p.addPlace}</Text>
       ) : null}
       {trigger && (extras || where) && !stall ? (
-        <Text style={st.link} onPress={() => setStall(true)}>{p.stall}</Text>
+        <Text style={st.link} accessibilityRole="button" onPress={() => setStall(true)}>{p.stall}</Text>
       ) : null}
 
       {preview ? <Text style={st.preview}>{preview}</Text> : null}

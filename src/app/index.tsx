@@ -77,7 +77,8 @@ export default function NowScreen() {
 
         <EnergyBar value={state.energy} onChange={(level) => dispatch({ type: 'set_energy', level })} />
         <HintSpot id="energy" auto={hint} />
-        {state.energy === 'fried' ? <Text style={{ color: colors.accent, fontFamily: fonts.sans, fontSize: 14 }}>{copy.friedNote}</Text> : null}
+        {/* Muted, not gold: gold belongs to the card's one button. */}
+        {state.energy === 'fried' ? <Text style={{ color: colors.muted, fontFamily: fonts.serif, fontStyle: 'italic', fontSize: 15, lineHeight: 21 }}>{copy.friedNote}</Text> : null}
 
         {askFrequency ? <FrequencyCard dispatch={dispatch} /> : null}
         {evidence ? <EvidenceCard evidence={evidence} onNoted={() => setEvidence(null)} /> : null}
@@ -99,7 +100,7 @@ export default function NowScreen() {
             <Text style={screenStyles.h2}>{copy.emptyNow}</Text>
             {!aphorismHidden ? (
               <Pressable onPress={() => setAphorismHidden(true)} accessibilityHint="Tap to hide">
-                <Text style={screenStyles.aphorism}>"{copy.aphorism.text}"</Text>
+                <Text style={screenStyles.aphorism}>“{copy.aphorism.text}”</Text>
                 <Text style={shared.faint}>{copy.aphorism.source}</Text>
               </Pressable>
             ) : null}

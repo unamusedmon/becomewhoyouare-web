@@ -93,7 +93,7 @@ export function RecurrenceCard({ queue, state, dispatch, onWin, onClose }: Props
   const header = (
     <View style={st.head}>
       <Text style={shared.faint}>{index + 1} of {queue.length}</Text>
-      <Text style={st.close} onPress={() => { dispatch({ type: 'dismiss_recurrence_session' }); onClose(); }}>{c.close}</Text>
+      <Text style={st.close} accessibilityRole="button" onPress={() => { dispatch({ type: 'dismiss_recurrence_session' }); onClose(); }}>{c.close}</Text>
     </View>
   );
 
@@ -120,8 +120,8 @@ export function RecurrenceCard({ queue, state, dispatch, onWin, onClose }: Props
           <Button label={c.no} onPress={() => answer('no')} />
         </View>
         <View style={[shared.row, { gap: space.md }]}>
-          <Text style={st.link} onPress={() => answer('unsure')}>{c.unsure}</Text>
-          <Text style={st.link} onPress={() => answer('skipped')}>{c.skip}</Text>
+          <Text style={st.link} accessibilityRole="button" onPress={() => answer('unsure')}>{c.unsure}</Text>
+          <Text style={st.link} accessibilityRole="button" onPress={() => answer('skipped')}>{c.skip}</Text>
         </View>
       </>
     );
@@ -186,7 +186,7 @@ export function RecurrenceCard({ queue, state, dispatch, onWin, onClose }: Props
               <Text style={[shared.chipText, { color: colors.ink }]}>{b.statement}</Text>
             </Pressable>
           ))}
-          <Text style={st.link} onPress={() => { dispatch({ type: 'link_routine_becoming', routineId: id, becomingId: null }); advance(); }}>{c.skip}</Text>
+          <Text style={st.link} accessibilityRole="button" onPress={() => { dispatch({ type: 'link_routine_becoming', routineId: id, becomingId: null }); advance(); }}>{c.skip}</Text>
         </View>
       </>
     );
@@ -235,11 +235,11 @@ export function FrequencyCard({ dispatch }: { dispatch: Dispatch }) {
 
 const st = themed(() => ({
   card: { borderRadius: 16, borderWidth: 1, borderColor: colors.accent, padding: space.lg, gap: space.md, backgroundColor: colors.accentCard },
-  head: { flexDirection: 'row', justifyContent: 'space-between' },
-  close: { color: colors.faint, fontFamily: fonts.sans, fontSize: 13 },
+  head: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  close: { color: colors.faint, fontFamily: fonts.sans, fontSize: 13, paddingVertical: space.xs, paddingLeft: space.md },
   q: { color: colors.ink, fontFamily: fonts.serif, fontSize: 18, lineHeight: 26, fontStyle: 'italic', opacity: 0.9 },
   title: { color: colors.ink, fontFamily: fonts.serif, fontSize: 24, lineHeight: 31, letterSpacing: 0.5 },
   menu: { gap: space.xs, alignItems: 'flex-start' },
-  link: { color: colors.muted, fontFamily: fonts.sans, fontSize: 13, textDecorationLine: 'underline' },
+  link: { color: colors.muted, fontFamily: fonts.sans, fontSize: 13, textDecorationLine: 'underline', paddingVertical: space.xs },
   input: { color: colors.ink, fontFamily: fonts.serif, fontSize: 22, borderBottomWidth: 1, borderBottomColor: colors.accent, paddingVertical: space.xs },
 }));

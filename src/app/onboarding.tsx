@@ -165,7 +165,7 @@ export default function Onboarding() {
           />
           <View style={{ gap: space.xs }}>
             {o.childExamples.map((ex) => (
-              <Text key={ex} style={st.example} onPress={() => setBecoming(ex)}>{ex}</Text>
+              <Text key={ex} style={st.example} accessibilityRole="button" onPress={() => setBecoming(ex)}>{ex}</Text>
             ))}
           </View>
           <View style={shared.row}>
@@ -187,7 +187,7 @@ export default function Onboarding() {
           <Text style={screenStyles.h1}>{o.amorTitle}</Text>
           <Text style={screenStyles.body}>{o.amorBody}</Text>
           <View>
-            <Text style={screenStyles.aphorism}>"{copy.aphorism.text}"</Text>
+            <Text style={screenStyles.aphorism}>“{copy.aphorism.text}”</Text>
             <Text style={shared.faint}>{copy.aphorism.source}</Text>
           </View>
           <View style={shared.row}>
@@ -215,8 +215,8 @@ const st = themed(() => ({
   talk: { flexDirection: 'row', alignItems: 'center', gap: space.md, alignSelf: 'flex-start' },
   talkText: { color: colors.ink, fontFamily: fonts.sans, fontSize: 16 },
   dots: { flexDirection: 'row', gap: 6 },
-  dot: { width: 6, height: 6, borderRadius: 3, backgroundColor: colors.line },
-  dotOn: { backgroundColor: colors.accent },
+  dot: { width: 6, height: 6, borderRadius: 3, backgroundColor: colors.faint },
+  dotOn: { width: 18, backgroundColor: colors.accent },
   dump: {
     minHeight: 180, color: colors.ink, fontFamily: fonts.sans, fontSize: 17, lineHeight: 25, textAlignVertical: 'top',
     backgroundColor: colors.surface, borderRadius: 12, borderWidth: 1, borderColor: colors.line, padding: space.md,
